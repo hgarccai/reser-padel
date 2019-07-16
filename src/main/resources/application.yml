@@ -1,0 +1,14 @@
+
+#cambiar el logo de springboot por uno propio (configuraciones en spring apendix)
+spring:
+  banner:
+    location:  classpath:banner.txt #classpath/folder/banner.txt
+    
+#Nombre de la aplicación
+  application.name: reserpadel
+#Configuración de la bbdd
+  datasource:
+    url: jdbc:mariadb://localhost:3306/reserpadel
+    username: root
+    password: root
+  jpa.hibernate.ddl-auto: create
