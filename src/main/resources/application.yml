@@ -4,6 +4,9 @@ spring:
   banner:
     location:  classpath:banner.txt #classpath/folder/banner.txt
     
+  main:
+    allow-bean-definition-overriding: true
+    
 #Nombre de la aplicación
   application.name: reserpadel
 #Configuración de la bbdd
@@ -12,3 +15,11 @@ spring:
     username: root
     password: root
   jpa.hibernate.ddl-auto: create
+
+  
+#Constantes
+exceptions:
+  email: Email no informado o erroneo
+  user:
+    notfound: Persona no encontrada
+    exist: ya esta registrado

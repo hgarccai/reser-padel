@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.reserpadel.domain.Persona;
 
-public interface PersonlService{
+public interface PersonService{
 	
 	Persona create(Persona p);
 	List<Persona> findAll();
