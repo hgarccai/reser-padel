@@ -13,11 +13,11 @@ import javax.validation.constraints.NotEmpty;
 public class Persona {
 
 	@Id
-	@NotEmpty(message = "{field.notnul}")
+	@NotEmpty(message = "{field.notnull}")
 	@Email(message = "{email.notempty}") 
 	private String email;
 	
-	@NotEmpty(message = "{name.notnull}")
+	@NotEmpty(message = "{field.notnull}")
 	private String nombre;
 	
 	@Min(message = "{padel.minlevel}", value = 1)

@@ -1,8 +1,16 @@
 package com.reserpadel.services;
 
 import java.util.List;
+//import java.util.Set;
 import java.util.function.Predicate;
 
+//import javax.validation.ConstraintViolation;
+//import javax.validation.ConstraintViolationException;
+//import javax.validation.Validation;
+//import javax.validation.Validator;
+//import javax.validation.ValidatorFactory;
+
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import com.reserpadel.ConstantString;
@@ -11,6 +19,8 @@ import com.reserpadel.repositories.PersonRepository;
 
 @Service
 public class PersonServiceImpl implements PersonService {
+	
+	final static Logger logger = Logger.getLogger(PersonServiceImpl.class);
 
 	private PersonRepository personrepo;
 	private ConstantString constants;
@@ -31,8 +41,36 @@ public class PersonServiceImpl implements PersonService {
 		personrepo.findById(p.getEmail()).ifPresent(a -> {
 			throw new RuntimeException(a.getEmail() + constants.getUserexist());
 		});
+		
 		return personrepo.save(p);
+		/*
+		try {
+			return performSave(p);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		*/
 	}
+	/*
+	//ÑAPA IMPERATIVA PARA LOS ERRORES DE VALIDACIÓN
+	private Persona performSave(Persona ObjectToSave) throws Exception {
+		ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+		Validator validator = factory.getValidator();
+
+		Set<ConstraintViolation<Persona>> constraintViolations = validator.validate(ObjectToSave);
+
+		if (constraintViolations.size() > 0) {
+			logger.info("VIOLATION OCCURED");
+			for (ConstraintViolation<Persona> contraints : constraintViolations) {
+				logger.info(contraints.getRootBeanClass().getSimpleName() + "." + contraints.getPropertyPath() + " "
+						+ contraints.getMessage());
+				throw new RuntimeException(contraints.getMessage().toString());
+			}
+		}else {
+			return ObjectToSave;
+		}
+	}*/
 
 	@Override
 	public List<Persona> findAll() {
