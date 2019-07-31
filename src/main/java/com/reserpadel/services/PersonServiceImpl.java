@@ -11,10 +11,12 @@ import java.util.function.Predicate;
 //import javax.validation.ValidatorFactory;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import com.reserpadel.ConstantString;
 import com.reserpadel.domain.Persona;
+import com.reserpadel.dto.PersonDto;
 import com.reserpadel.repositories.PersonRepository;
 
 @Service
@@ -93,14 +95,16 @@ public class PersonServiceImpl implements PersonService {
 	}
 
 	@Override
-	public Persona update(String email, Persona p) {
-
-		return null;
+	public Persona update(String email, PersonDto persondto) {
+		
+		Persona p = findById(email);
+		BeanUtils.copyProperties(persondto, p, "email");
+		
+		return personrepo.save(p);
 	}
 
 	@Override
 	public Persona delete(String email) {
-
 		Persona p = findById(email);
 		personrepo.deleteById(email);
 		return p;

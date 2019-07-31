@@ -14,7 +14,8 @@ spring:
     url: jdbc:mariadb://localhost:3306/reserpadel
     username: root
     password: root
-  jpa.hibernate.ddl-auto: create
+# esto se carga la bdd cuando inicia srping
+#  jpa.hibernate.ddl-auto: create
 
   
 #Constantes

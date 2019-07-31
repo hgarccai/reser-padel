@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.reserpadel.domain.Persona;
+import com.reserpadel.dto.PersonDto;
 import com.reserpadel.services.PersonService;
 
 //import java.util.HashMap;
@@ -32,20 +33,6 @@ public class PersonaController {
 
 	public PersonaController(PersonService personService) {
 		this.personService = personService;
-
-	}
-
-	// SOLO PUEDE HABER UN ÚNICO MÉTODO *MAPPING, PARA UNA MISMA DIRECCIÓN, SI NO
-	// DARÁ ERROR MÉTODO AMBIGUO
-
-	@GetMapping
-	public List<Persona> findAll() {
-		return new ArrayList<>();
-	}
-
-	@GetMapping("/{email}")
-	public Persona findByID(@PathVariable String email) {
-		return personService.findById(email);
 	}
 
 	@PostMapping
@@ -53,25 +40,27 @@ public class PersonaController {
 		return personService.create(p);
 	}
 
-	@DeleteMapping("/{email}")
-	public void delete(/* byId */) {
-
+	@GetMapping
+	public List<Persona> findAll() {
+		return new ArrayList<>();
 	}
+	
+	// SOLO PUEDE HABER UN ÚNICO MÉTODO *MAPPING, PARA UNA MISMA DIRECCIÓN, SI NO
+	// DARÁ ERROR MÉTODO AMBIGUO
+	
+	@GetMapping("/{email}")
+	public Persona findByID(@PathVariable String email) {
+		return personService.findById(email);
+	}
+
 
 	@PutMapping("/{email}")
-	public void update(/* byId */) {
-
+	public Persona update(@PathVariable String email, @Valid @RequestBody PersonDto personDto) {
+		return personService.update(email, personDto);
 	}
-
-	/*
-	 * @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-	 * 
-	 * @ExceptionHandler(MethodArgumentNotValidException.class) public Map<String,
-	 * String> handleValidationExceptions( MethodArgumentNotValidException ex) {
-	 * Map<String, String> errors = new HashMap<>();
-	 * ex.getBindingResult().getAllErrors().forEach((error) -> { String fieldName =
-	 * ((FieldError) error).getField(); String errorMessage =
-	 * error.getDefaultMessage(); errors.put(fieldName, errorMessage); }); return
-	 * errors; }
-	 */
+	
+	@DeleteMapping("/{email}")
+	public Persona delete(@PathVariable String email) {
+		return personService.delete(email);
+	}
 }
