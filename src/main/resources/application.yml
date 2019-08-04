@@ -24,3 +24,8 @@ exceptions:
   user:
     notfound: Persona no encontrada
     exist: ya esta registrado
+  floor:
+    duplicate: está duplicada.
+    noexist: no existe.
+    nofill: Pista no informada.
+    

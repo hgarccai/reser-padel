@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Configuration;
 @ConfigurationProperties //vincula y valida la clase de configuracion
 public class ConstantString {
 
+
 	@Value("${exceptions.email}")
 	private String emailerror;
 
@@ -30,5 +31,27 @@ public class ConstantString {
 
 	public String getUserexist() {
 		return userexist;
+	}
+	
+	// Errores definidos en messages.properties
+	@Value("${exceptions.floor.duplicate}")
+	private String duplicatefloor;
+	
+	@Value("${exceptions.floor.noexist}")
+	private String floornoexists;
+	
+	@Value("${exceptions.floor.nofill}")
+	private String floornofill;
+
+	public String getDuplicatefloor() {
+		return duplicatefloor;
+	}
+
+	public String getFloornoexists() {
+		return floornoexists;
+	}
+
+	public String getFloornofill() {
+		return floornofill;
 	}
 }
